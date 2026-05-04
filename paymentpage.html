@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Checkout</h1>
+</header>
+
+<section class="checkout">
+  <h2 id="planName">Loading...</h2>
+
+  <form onsubmit="return fakePay()">
+    <input type="text" placeholder="Minecraft Username" required>
+    <input type="email" placeholder="Email" required>
+    <input type="text" placeholder="Card Number" required>
+    <button class="btn">Pay Now</button>
+  </form>
+
+  <p id="done" style="display:none; color:lime;">Payment Complete!</p>
+</section>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("planName").innerText = "Plan: " + (params.get("plan") || "Unknown");
+
+function fakePay(){
+  document.getElementById("done").style.display = "block";
+  return false;
+}
+</script>
+
+</body>
+</html>
