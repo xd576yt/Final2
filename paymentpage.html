@@ -2,35 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Checkout</title>
+  <title>Redirecting...</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <h1>Checkout</h1>
+  <h1>Redirecting to Secure Checkout</h1>
 </header>
 
 <section class="checkout">
-  <h2 id="planName">Loading...</h2>
-
-  <form onsubmit="return fakePay()">
-    <input type="text" placeholder="Minecraft Username" required>
-    <input type="email" placeholder="Email" required>
-    <input type="text" placeholder="Card Number" required>
-    <button class="btn">Pay Now</button>
-  </form>
-
-  <p id="done" style="display:none; color:lime;">Payment Complete!</p>
+  <h2>Taking you to payment...</h2>
+  <p>Please wait.</p>
 </section>
 
 <script>
 const params = new URLSearchParams(window.location.search);
-document.getElementById("planName").innerText = "Plan: " + (params.get("plan") || "Unknown");
+const plan = params.get("plan");
 
-function fakePay(){
-  document.getElementById("done").style.display = "block";
-  return false;
+const links = {
+  basic: "https://YOUR_STRIPE_LINK_BASIC",
+  pro: "https://YOUR_STRIPE_LINK_PRO",
+  elite: "https://YOUR_STRIPE_LINK_ELITE"
+};
+
+if (links[plan]) {
+  window.location.href = links[plan];
+} else {
+  document.querySelector("h2").innerText = "Invalid plan selected";
 }
 </script>
 
